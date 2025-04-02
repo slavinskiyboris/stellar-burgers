@@ -6,6 +6,11 @@
   color: #f2f2f3;
 }
 
+.page {
+  display: flex;
+  justify-content: center;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
