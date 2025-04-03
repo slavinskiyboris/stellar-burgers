@@ -92,7 +92,7 @@ export const verifyUserAuth = createAsyncThunk(
 );
 
 const userSlice = createSlice({
-  name: `${AUTH_SLICE_NAME}`,
+  name: AUTH_SLICE_NAME,
   initialState,
   reducers: {
     authChecked: (state) => {
@@ -101,7 +101,10 @@ const userSlice = createSlice({
   },
   selectors: {
     getUserData: (state) => state.data,
-    getAuthStatus: (state) => state.isAuthChecked
+    getAuthStatus: (state) => state.isAuthChecked,
+    // Алиасы для совместимости
+    getUser: (state) => state.data,
+    getIsAuthChecked: (state) => state.isAuthChecked
   },
   extraReducers: (builder) => {
     builder
@@ -168,5 +171,14 @@ const userSlice = createSlice({
 });
 
 export const userReducer = userSlice.reducer;
-export const { getUserData, getAuthStatus } = userSlice.selectors;
+export const { getUserData, getAuthStatus, getUser, getIsAuthChecked } =
+  userSlice.selectors;
 export const { authChecked } = userSlice.actions;
+
+// Алиасы для совместимости с компонентами
+export const fetchRegisterUser = signUpUser;
+export const fetchLoginUser = signInUser;
+export const fetchGetUser = loadUserData;
+export const fetchLogoutUser = signOutUser;
+export const fetchUpdateUser = saveUserProfile;
+export const checkUserAuth = verifyUserAuth;

@@ -57,7 +57,7 @@ export const fetchOrderDetails = createAsyncThunk(
 );
 
 const ordersSlice = createSlice({
-  name: `${ORDERS_SLICE_NAME}`,
+  name: ORDERS_SLICE_NAME,
   initialState,
   reducers: {
     resetOrderData: (state) => {
@@ -72,7 +72,15 @@ const ordersSlice = createSlice({
     getPersonalOrders: (state) => state.userOrders,
     getOrderDetails: (state) => state.orderInfo,
     getOrderData: (state) => state.orderRequestData,
-    getOrderStatus: (state) => state.orderRequest
+    getOrderStatus: (state) => state.orderRequest,
+    // Альтернативные имена селекторов для совместимости
+    getOrders: (state) => state.orders,
+    getTotal: (state) => state.total,
+    getTotalToDay: (state) => state.totalToday,
+    getUserOrders: (state) => state.userOrders,
+    getOrderInfo: (state) => state.orderInfo,
+    getOrderRequestData: (state) => state.orderRequestData,
+    getOrderRequest: (state) => state.orderRequest
   },
   extraReducers: (builder) => {
     builder
@@ -137,6 +145,18 @@ export const {
   getPersonalOrders,
   getOrderData,
   getOrderStatus,
-  getOrderDetails
+  getOrderDetails,
+  // Альтернативные экспорты для совместимости
+  getOrders,
+  getTotal,
+  getTotalToDay,
+  getUserOrders,
+  getOrderInfo,
+  getOrderRequestData,
+  getOrderRequest
 } = ordersSlice.selectors;
 export const { resetOrderData } = ordersSlice.actions;
+
+// Алиасы для поддержки обратной совместимости
+export const fetchOrderBurgerApi = createOrder;
+export const clearOrderData = resetOrderData;
